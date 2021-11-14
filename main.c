@@ -14,16 +14,29 @@ static inline void enable_raw_mode(void)
 
     atexit(disable_raw_mode);   /* defer call to disable_raw_mode() */
 
-    /* Fetch the current attributes and save it */
+    /* Fetch the current attributes and keep a copy */
     tcgetattr(STDIN_FILENO, &orig_termios);
     raw = orig_termios;
 
     /* turn off a bunch of things:
-     *      ECHO        : echoing of characters
-     *      ICANON      : canonical mode (read byte-by-byte)
-     *      ISIG        : signals like SIGINT (^C) and SIGSTP (^Z)
+     *      BRKINT  : send SIGINT on break
+     *      ICRNL   : translation of '\r' to '\n'
+     *      INPCK   : parity checking
+     *      ISTRIP  : strip 8th bit of every input byte
+     *      IXON    : software flow control (^S and ^Q)
+     *      OPOST   : translation of "\n" to "\r\n"
+     *      ECHO    : echoing of characters
+     *      ICANON  : canonical mode (not reading byte-by-byte)
+     *      IEXTEN  : ^V
+     *      ISIG    : signals like SIGINT (on ^C) and SIGSTP (on ^Z)
      */
-    raw.c_lflag &= ~(ECHO | ICANON | ISIG);
+    raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+    raw.c_oflag &= ~(OPOST);
+    raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+
+    /* Set character size to 8 bits per byte.
+     * This isn't always necessary */
+    raw.c_cflag |= (CS8);
 
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
