@@ -18,7 +18,8 @@ static inline void enable_raw_mode(void)
     tcgetattr(STDIN_FILENO, &orig_termios);
     raw = orig_termios;
 
-    raw.c_lflag &= ~(ECHO); /* turn off echoing */
+    /* turn off echoing and canonical mode */
+    raw.c_lflag &= ~(ECHO | ICANON);
 
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
