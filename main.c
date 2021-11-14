@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <termios.h>
@@ -38,6 +39,10 @@ static inline void enable_raw_mode(void)
      * This isn't always necessary */
     raw.c_cflag |= (CS8);
 
+    /* Set timeout for read() */
+    raw.c_cc[VMIN] = 0;     /* read() returns as soon as there's input */
+    raw.c_cc[VTIME] = 1;    /* read() times out after 100 milliseconds */
+
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
 
@@ -52,8 +57,24 @@ int main(void)
 
     enable_raw_mode();
 
-    /* keep reading until EOF or 'q' */
-    while ( read(STDIN_FILENO, &c, 1) && c != 'q' );
+    while ( 1 ) {
+
+        /* Read a byte from the standard input */
+        while ( read(STDIN_FILENO, &c, 1) < 1 );
+
+        if ( iscntrl(c) ) {
+            /* Control characters are non-printable,
+             * hence don't even try to print them */
+            printf("%d\r\n", c);
+
+        } else {
+            /* print character ascii values and
+             * show the characters as well */
+            printf("%d ('%c')\r\n", c, c);
+
+            if ( c == 'q' ) break;
+        }
+    }
 
     return EXIT_SUCCESS;
 }
