@@ -18,8 +18,12 @@ static inline void enable_raw_mode(void)
     tcgetattr(STDIN_FILENO, &orig_termios);
     raw = orig_termios;
 
-    /* turn off echoing and canonical mode */
-    raw.c_lflag &= ~(ECHO | ICANON);
+    /* turn off a bunch of things:
+     *      ECHO        : echoing of characters
+     *      ICANON      : canonical mode (read byte-by-byte)
+     *      ISIG        : signals like SIGINT (^C) and SIGSTP (^Z)
+     */
+    raw.c_lflag &= ~(ECHO | ICANON | ISIG);
 
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
