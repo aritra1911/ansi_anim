@@ -1,17 +1,26 @@
-CFLAGS = -Wall -Wextra -pedantic -std=c99
+CC ?= cc
 
-SRCS = main.c
-OBJS = $(SRCS:.c=.o)
+INC = -Iinc -Ilib/inc
+LIB =
+
+CFLAGS = $(INC) -Wall -Wextra -pedantic -std=c99
+CPPFLAGS =
+LDFLAGS =
+
+SRCS = src/main.c
+OBJS = $(SRCS:src/%.c=obj/%.o)
 
 .PHONY: all clean
 
-all: anim
+all: bin/anim
 
-anim: $(OBJS)
+bin/anim: $(OBJS)
+	@mkdir -p bin
 	$(CC) $(LDFLAGS) -o $@ $^
 
-%.o: %.c
+obj/%.o: src/%.c
+	@mkdir -p obj
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(OBJS) anim
+	rm -rf obj bin
