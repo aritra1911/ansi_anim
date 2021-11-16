@@ -68,7 +68,7 @@ int main(void)
      * }
      */
 
-    draw_rectangle((point_t) { 10, 2 }, 3, 4);
+    draw_rectangle((point_t) { 2, 2 }, 32, 16);
 
     while ( 1 ) {
 
