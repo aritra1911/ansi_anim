@@ -4,6 +4,9 @@
 #include <termios.h>
 #include <unistd.h>
 
+#include <graphics/common.h>
+#include <graphics/shapes.h>
+
 struct termios orig_termios;    /* Keeps the original attributes */
 
 static inline void enable_raw_mode(void);
@@ -56,6 +59,16 @@ int main(void)
     char c;
 
     enable_raw_mode();
+
+    /* TODO:
+     * box_t objects[32];
+     *
+     * for (int i = 0; i < 32; i++) {
+     *     draw(&object[i]);
+     * }
+     */
+
+    draw_rectangle((point_t) { 10, 2 }, 3, 4);
 
     while ( 1 ) {
 
