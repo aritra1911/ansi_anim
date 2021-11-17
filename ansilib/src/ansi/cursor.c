@@ -1,9 +1,31 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <stdint.h>
+#include <inttypes.h>
 #include <string.h>
 
 #include <ansi/common.h>
 #include <ansi/cursor.h>
+
+point_t get_cursor_pos(void)
+{
+    char buf[16];
+    point_t ret = { 0 };
+
+    /* ESC[6n   request cursor position (reports as ESC[#;#R) */
+
+    write(STDOUT_FILENO, CSI"6n", 4);
+    if ( read(STDIN_FILENO, buf, 16) ) {
+
+        uint32_t line, column;
+        sscanf(buf, CSI"%"PRIu32"i;%"PRIu32"iR", &line, &column);
+
+        ret.x = column;
+        ret.y = line;
+    }
+
+    return ret;
+}
 
 void move_cursor(point_t pos)
 {

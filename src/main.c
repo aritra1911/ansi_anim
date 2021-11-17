@@ -4,6 +4,7 @@
 #include <termios.h>
 #include <unistd.h>
 
+#include <ansi/cursor.h>
 #include <graphics/common.h>
 #include <graphics/shapes.h>
 
@@ -68,7 +69,13 @@ int main(void)
      * }
      */
 
-    draw_rectangle((point_t) { 2, 2 }, 32, 16);
+    /* save current cursor position */
+    point_t orig_cursor_pos = get_cursor_pos();
+
+    draw_rectangle((point_t) { 20, 40 }, 32, 16);
+
+    /* Return to the original cursor position */
+    move_cursor(orig_cursor_pos);
 
     while ( 1 ) {
 
