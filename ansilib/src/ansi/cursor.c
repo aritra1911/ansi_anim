@@ -18,7 +18,7 @@ point_t get_cursor_pos(void)
     if ( read(STDIN_FILENO, buf, 16) ) {
 
         uint32_t line, column;
-        sscanf(buf, CSI"%"PRIu32"i;%"PRIu32"iR", &line, &column);
+        sscanf(buf, CSI"%"PRIu32";%"PRIu32"R", &line, &column);
 
         ret.x = column;
         ret.y = line;
@@ -37,12 +37,13 @@ void move_cursor(point_t pos)
      * ESC[{line};{column}f
      */
 
-    sprintf(buf, CSI"%i;%iH", /* line */ pos.y, /* column */ pos.x);
+    sprintf(buf, CSI"%i;%iH", pos.y, pos.x);
     write(STDOUT_FILENO, (void *) buf, strlen(buf));
 }
 
 void nudge_cursor(dir_t direction, uint32_t step)
 {
+    /* TODO: `direction` is a bitmask */
     char buf[16], end_ch;
 
     /*
@@ -53,10 +54,10 @@ void nudge_cursor(dir_t direction, uint32_t step)
      */
 
     switch ( direction ) {
-    case UP:    end_ch = 'A'; break;
-    case DOWN:  end_ch = 'B'; break;
-    case RIGHT: end_ch = 'C'; break;
-    case LEFT:  end_ch = 'D'; break;
+        case UP:    end_ch = 'A'; break;
+        case DOWN:  end_ch = 'B'; break;
+        case RIGHT: end_ch = 'C'; break;
+        case LEFT:  end_ch = 'D';
     }
 
     sprintf(buf, CSI"%i%c", step, end_ch);

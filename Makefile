@@ -3,19 +3,21 @@ CC ?= cc
 INC = -Iinc -Iansilib/inc
 LIB =
 
-CFLAGS = $(INC) -Wall -Wextra -pedantic -std=c99
+CFLAGS = $(INC) -Wall -Wextra -pedantic -g -std=c99
 CPPFLAGS =
 LDFLAGS =
 
-SRCS = ansilib/src/graphics/common.c \
-       ansilib/src/graphics/shapes.c \
+SRCS = src/main.c \
+       ansilib/src/ansi/screen.c \
        ansilib/src/ansi/cursor.c \
-       src/main.c
+       ansilib/src/graphics/common.c \
+       ansilib/src/graphics/shapes.c
 
-OBJS = obj/graphics/common.o \
-       obj/graphics/shapes.o \
+OBJS = obj/main.o \
+       obj/ansi/screen.o \
        obj/ansi/cursor.o \
-       obj/main.o
+       obj/graphics/common.o \
+       obj/graphics/shapes.o
 
 .PHONY: all clean
 

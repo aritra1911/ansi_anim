@@ -5,6 +5,7 @@
 #include <unistd.h>
 
 #include <ansi/cursor.h>
+#include <ansi/screen.h>
 #include <graphics/common.h>
 #include <graphics/shapes.h>
 
@@ -69,12 +70,13 @@ int main(void)
      * }
      */
 
-    /* save current cursor position */
+    /* print out screen size */
+    point_t screen_size = get_screen_size();
+    printf("LINES = %i  COLUMNS = %i\r\n", screen_size.y, screen_size.x);
+
+    /* Draw a rectangle */
     point_t orig_cursor_pos = get_cursor_pos();
-
     draw_rectangle((point_t) { 20, 40 }, 32, 16);
-
-    /* Return to the original cursor position */
     move_cursor(orig_cursor_pos);
 
     while ( 1 ) {
