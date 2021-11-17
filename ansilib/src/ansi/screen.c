@@ -18,9 +18,8 @@ point_t get_screen_size(void)
      * doesn’t specify what happens when you try to move the cursor
      * off-screen.
      */
-    //nudge_cursor(RIGHT, 999);
-    //nudge_cursor(DOWN, 999);
-    write(STDOUT_FILENO, "\x1b[999C\x1b[999B", 12);
+    nudge_cursor(RIGHT, 999);
+    nudge_cursor(DOWN, 999);
     ret = get_cursor_pos();
 
     move_cursor(orig_pos);
