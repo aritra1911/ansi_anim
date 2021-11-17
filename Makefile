@@ -1,15 +1,15 @@
 CC ?= cc
 
-INC = -Iinc -Ilib/inc
+INC = -Iinc -Iansilib/inc
 LIB =
 
 CFLAGS = $(INC) -Wall -Wextra -pedantic -std=c99
 CPPFLAGS =
 LDFLAGS =
 
-SRCS = lib/src/graphics/common.c \
-       lib/src/graphics/shapes.c \
-       lib/src/ansi/cursor.c \
+SRCS = ansilib/src/graphics/common.c \
+       ansilib/src/graphics/shapes.c \
+       ansilib/src/ansi/cursor.c \
        src/main.c
 
 OBJS = obj/graphics/common.o \
@@ -25,11 +25,11 @@ bin/anim: $(OBJS)
 	@mkdir -p bin
 	$(CC) $(LDFLAGS) -o $@ $^
 
-obj/graphics/%.o: lib/src/graphics/%.c
+obj/graphics/%.o: ansilib/src/graphics/%.c
 	@mkdir -p obj/graphics
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
-obj/ansi/%.o: lib/src/ansi/%.c
+obj/ansi/%.o: ansilib/src/ansi/%.c
 	@mkdir -p obj/ansi
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
