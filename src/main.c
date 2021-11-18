@@ -4,6 +4,7 @@
 #include <termios.h>
 #include <unistd.h>
 
+#include <io.h>
 #include <ansi/cursor.h>
 #include <ansi/screen.h>
 #include <graphics/common.h>
@@ -76,7 +77,7 @@ int main(void)
 
     /* Draw a rectangle */
     point_t orig_cursor_pos = get_cursor_pos();
-    draw_rectangle((point_t) { 20, 40 }, 32, 16);
+    draw_rectangle((point_t) { 72, 12 }, 32, 16);
     move_cursor(orig_cursor_pos);
 
     while ( 1 ) {

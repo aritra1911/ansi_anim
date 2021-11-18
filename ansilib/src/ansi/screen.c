@@ -1,5 +1,3 @@
-#include <unistd.h>
-
 #include <ansi/cursor.h>
 
 point_t get_screen_size(void)

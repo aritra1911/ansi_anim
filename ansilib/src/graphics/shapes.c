@@ -1,7 +1,7 @@
-#include <unistd.h>
-
 #include <ansi/cursor.h>
 #include <graphics/shapes.h>
+
+#include <io.h>
 
 void draw_rectangle(point_t pos, uint32_t width, uint32_t height)
 {
@@ -9,7 +9,7 @@ void draw_rectangle(point_t pos, uint32_t width, uint32_t height)
 
     /* Top edge */
     for (uint32_t i = 0; i < width; i++) {
-        write(STDOUT_FILENO, (void *) "#", 1);
+        printmsg("#");
     }
 
     for (uint32_t i = 0; i < height - 2; i++) {
@@ -19,11 +19,11 @@ void draw_rectangle(point_t pos, uint32_t width, uint32_t height)
         nudge_cursor(DOWN, 1);
 
         /* Left edges */
-        write(STDOUT_FILENO, (void *) "#", 1);
+        printmsg("#");
 
         /* Right edges */
         nudge_cursor(RIGHT, width - 2);
-        write(STDOUT_FILENO, (void *) "#", 1);
+        printmsg("#");
     }
 
     /* Get to the next line */
@@ -32,6 +32,6 @@ void draw_rectangle(point_t pos, uint32_t width, uint32_t height)
 
     /* Bottom edge */
     for (uint32_t i = 0; i < width; i++) {
-        write(STDOUT_FILENO, (void *) "#", 1);
+        printmsg("#");
     }
 }

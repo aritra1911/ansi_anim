@@ -8,12 +8,14 @@ CPPFLAGS =
 LDFLAGS =
 
 SRCS = src/main.c \
-       ansilib/src/ansi/screen.c \
+       src/io.c \
        ansilib/src/ansi/cursor.c \
+       ansilib/src/ansi/screen.c \
        ansilib/src/graphics/common.c \
        ansilib/src/graphics/shapes.c
 
 OBJS = obj/main.o \
+       obj/io.o \
        obj/ansi/screen.o \
        obj/ansi/cursor.o \
        obj/graphics/common.o \
