@@ -3,16 +3,21 @@
 
 #include <io.h>
 
-void draw_rectangle(point_t pos, uint32_t width, uint32_t height)
+void draw_rectangle(uint32_t width, uint32_t height)
 {
-    move_cursor(pos);
-
     /* Top edge */
     for (uint32_t i = 0; i < width; i++) {
+        /* TODO: This character should be an argument such as
+         *       `border_char`. Also, let's not forget about
+         *       `border_width` */
         printmsg("#");
     }
 
     for (uint32_t i = 0; i < height - 2; i++) {
+
+        /* TODO: Add fill character argument.
+         *       If fill character is not '\0', we should fill the
+         *       rectangle with that character. */
 
         /* Get to the next line */
         nudge_cursor(LEFT, width);

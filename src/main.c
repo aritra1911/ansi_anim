@@ -8,7 +8,7 @@
 #include <ansi/cursor.h>
 #include <ansi/screen.h>
 #include <graphics/common.h>
-#include <graphics/shapes.h>
+#include <graphics/box.h>
 
 struct termios orig_termios;    /* Keeps the original attributes */
 
@@ -63,21 +63,23 @@ int main(void)
 
     enable_raw_mode();
 
-    /* TODO:
-     * box_t objects[32];
-     *
-     * for (int i = 0; i < 32; i++) {
-     *     draw(&object[i]);
-     * }
-     */
-
     /* print out screen size */
     point_t screen_size = get_screen_size();
     printf("LINES = %i  COLUMNS = %i\r\n", screen_size.y, screen_size.x);
 
-    /* Draw a rectangle */
+    /* Draw beautiful geometric rectangles of various sizes at various
+     * places all over the screen. */
+    box_t rects[] = {
+        { RECTANGLE, { 20, 12 }, 12, 13 },
+        { RECTANGLE, { 52,  7 },  7,  8 },
+        { RECTANGLE, { 42, 30 }, 20, 16 },
+        { RECTANGLE, { 72, 12 }, 32, 16 },
+    };
+
     point_t orig_cursor_pos = get_cursor_pos();
-    draw_rectangle((point_t) { 72, 12 }, 32, 16);
+    for (int i = 0; i < 4; i++) {
+        draw(&rects[i]);
+    }
     move_cursor(orig_cursor_pos);
 
     while ( 1 ) {
