@@ -88,9 +88,9 @@ int main(void)
         /* Read a byte from the standard input */
         while ( read(STDIN_FILENO, &c, 1) < 1 ) {
 
-            if ( rects[2].origin.y + rects[2].height > screen_size.y ) {
+            if ( rects[2].origin.y + rects[2].height + 4 > screen_size.y ) {
                 dir = UP;
-            } else if ( rects[2].origin.y <= 1 ) {
+            } else if ( rects[2].origin.y - 4 < 1 ) {
                 dir = DOWN;
             }
 
@@ -106,20 +106,33 @@ int main(void)
             else if ( c == 'h' || c == 'j' || c == 'k' || c == 'l' ) {
                 orig_cursor_pos = get_cursor_pos();
                 erase(&rects[0]);
+
                 switch ( c ) {
                 case 'h':
-                    nudge(&rects[0], LEFT, 1);
+                    if ( rects[0].origin.x > 1 ) {
+                        nudge(&rects[0], LEFT, 1);
+                    }
                     break;
+
                 case 'j':
-                    nudge(&rects[0], DOWN, 1);
+                    if ( rects[0].origin.y + rects[0].height <= screen_size.y ) {
+                        nudge(&rects[0], DOWN, 1);
+                    }
                     break;
+
                 case 'k':
-                    nudge(&rects[0], UP, 1);
+                    if ( rects[0].origin.y > 1 ) {
+                        nudge(&rects[0], UP, 1);
+                    }
                     break;
+
                 case 'l':
-                    nudge(&rects[0], RIGHT, 1);
+                    if ( rects[0].origin.x + rects[0].width < screen_size.x ) {
+                        nudge(&rects[0], RIGHT, 1);
+                    }
                     break;
                 }
+
                 draw(&rects[0]);
                 move_cursor(orig_cursor_pos);
             }
