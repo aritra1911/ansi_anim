@@ -82,9 +82,24 @@ int main(void)
     }
     move_cursor(orig_cursor_pos);
 
+    dir_t dir = DOWN;
+
     while ( 1 ) {
         /* Read a byte from the standard input */
-        while ( read(STDIN_FILENO, &c, 1) < 1 );
+        while ( read(STDIN_FILENO, &c, 1) < 1 ) {
+
+            if ( rects[2].origin.y + rects[2].height > screen_size.y ) {
+                dir = UP;
+            } else if ( rects[2].origin.y <= 1 ) {
+                dir = DOWN;
+            }
+
+            orig_cursor_pos = get_cursor_pos();
+            erase(&rects[2]);
+            nudge(&rects[2], dir, 4);
+            draw(&rects[2]);
+            move_cursor(orig_cursor_pos);
+        }
 
         if ( !iscntrl(c) ) {
             if ( c == 'q' ) break;
