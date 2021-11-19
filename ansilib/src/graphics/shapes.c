@@ -3,14 +3,14 @@
 
 #include <io.h>
 
-void draw_rectangle(uint32_t width, uint32_t height)
+void draw_rectangle(uint32_t width, uint32_t height, char ch)
 {
     /* Top edge */
     for (uint32_t i = 0; i < width; i++) {
         /* TODO: This character should be an argument such as
          *       `border_char`. Also, let's not forget about
          *       `border_width` */
-        printmsg("#");
+        printmsg("%c", ch);
     }
 
     for (uint32_t i = 0; i < height - 2; i++) {
@@ -24,11 +24,11 @@ void draw_rectangle(uint32_t width, uint32_t height)
         nudge_cursor(DOWN, 1);
 
         /* Left edges */
-        printmsg("#");
+        printmsg("%c", ch);
 
         /* Right edges */
         nudge_cursor(RIGHT, width - 2);
-        printmsg("#");
+        printmsg("%c", ch);
     }
 
     /* Get to the next line */
@@ -37,6 +37,6 @@ void draw_rectangle(uint32_t width, uint32_t height)
 
     /* Bottom edge */
     for (uint32_t i = 0; i < width; i++) {
-        printmsg("#");
+        printmsg("%c", ch);
     }
 }

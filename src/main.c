@@ -83,21 +83,31 @@ int main(void)
     move_cursor(orig_cursor_pos);
 
     while ( 1 ) {
-
         /* Read a byte from the standard input */
         while ( read(STDIN_FILENO, &c, 1) < 1 );
 
-        if ( iscntrl(c) ) {
-            /* Control characters are non-printable,
-             * hence don't even try to print them */
-            printf("%d\r\n", c);
-
-        } else {
-            /* print character ascii values and
-             * show the characters as well */
-            printf("%d ('%c')\r\n", c, c);
-
+        if ( !iscntrl(c) ) {
             if ( c == 'q' ) break;
+            else if ( c == 'h' || c == 'j' || c == 'k' || c == 'l' ) {
+                orig_cursor_pos = get_cursor_pos();
+                erase(&rects[0]);
+                switch ( c ) {
+                case 'h':
+                    nudge(&rects[0], LEFT, 1);
+                    break;
+                case 'j':
+                    nudge(&rects[0], DOWN, 1);
+                    break;
+                case 'k':
+                    nudge(&rects[0], UP, 1);
+                    break;
+                case 'l':
+                    nudge(&rects[0], RIGHT, 1);
+                    break;
+                }
+                draw(&rects[0]);
+                move_cursor(orig_cursor_pos);
+            }
         }
     }
 
