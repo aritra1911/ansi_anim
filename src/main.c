@@ -7,6 +7,7 @@
 #include <io.h>
 #include <ansi/cursor.h>
 #include <ansi/screen.h>
+#include <ansi/colors.h>
 #include <graphics/common.h>
 #include <graphics/box.h>
 
@@ -63,16 +64,27 @@ int main(void)
 
     enable_raw_mode();
 
-    /* print out screen size */
     point_t screen_size = get_screen_size();
-    printf("LINES = %i  COLUMNS = %i\r\n", screen_size.y, screen_size.x);
+
+    style_t test_style[] = {
+        { GREEN_FG, 0, BOLD },
+        { YELLOW_FG, 0, 0 },
+        { WHITE_FG, MAGENTA_BG, BOLD | UNDERLINE },
+    };
+
+    printws(&test_style[2], "The quick brown fox jumps over the lazy dog.");
+    printws(NULL, "\r\n");
+    printws(&test_style[0], "LINES = %i", screen_size.y);
+    printws(NULL, "\r\n");
+    printws(&test_style[1], "COLUMNS = %i", screen_size.x);
+    printws(NULL, "\r\n");
 
     /* Draw beautiful geometric rectangles of various sizes at various
      * places all over the screen. */
     box_t rects[] = {
         { RECTANGLE, { 20, 12 }, 12, 13 },
         { RECTANGLE, { 52,  7 },  7,  8 },
-        { RECTANGLE, { 42, 30 }, 20, 16 },
+        { RECTANGLE, { 49, 30 }, 20, 16 },
         { RECTANGLE, { 72, 12 }, 32, 16 },
     };
 
@@ -127,7 +139,7 @@ int main(void)
                     break;
 
                 case 'l':
-                    if ( rects[0].origin.x + rects[0].width < screen_size.x ) {
+                    if ( rects[0].origin.x + rects[0].width <= screen_size.x ) {
                         nudge(&rects[0], RIGHT, 1);
                     }
                     break;

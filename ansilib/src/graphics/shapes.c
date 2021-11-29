@@ -1,7 +1,9 @@
+#include <stddef.h>
+
+#include <io.h>
 #include <ansi/cursor.h>
 #include <graphics/shapes.h>
 
-#include <io.h>
 
 void draw_rectangle(uint32_t width, uint32_t height, char ch)
 {
@@ -10,7 +12,7 @@ void draw_rectangle(uint32_t width, uint32_t height, char ch)
         /* TODO: This character should be an argument such as
          *       `border_char`. Also, let's not forget about
          *       `border_width` */
-        printmsg("%c", ch);
+        printws(NULL, "%c", ch);
     }
 
     for (uint32_t i = 0; i < height - 2; i++) {
@@ -24,11 +26,11 @@ void draw_rectangle(uint32_t width, uint32_t height, char ch)
         nudge_cursor(DOWN, 1);
 
         /* Left edges */
-        printmsg("%c", ch);
+        printws(NULL, "%c", ch);
 
         /* Right edges */
         nudge_cursor(RIGHT, width - 2);
-        printmsg("%c", ch);
+        printws(NULL, "%c", ch);
     }
 
     /* Get to the next line */
@@ -37,6 +39,6 @@ void draw_rectangle(uint32_t width, uint32_t height, char ch)
 
     /* Bottom edge */
     for (uint32_t i = 0; i < width; i++) {
-        printmsg("%c", ch);
+        printws(NULL, "%c", ch);
     }
 }

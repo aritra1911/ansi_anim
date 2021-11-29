@@ -14,7 +14,7 @@ point_t get_cursor_pos(void)
 
     /* ESC[6n   request cursor position ( reports as ESC[#;#R ) */
 
-    printmsg(CSI"6n");
+    printws(NULL, CSI"6n");
     if ( scanmsg(CSI"%"PRIu32";%"PRIu32"R", &line, &column) ) {
 
         ret.x = column;
@@ -32,7 +32,7 @@ void move_cursor(point_t pos)
      * ESC[{line};{column}f
      */
 
-    printmsg(CSI"%i;%iH", pos.y, pos.x);
+    printws(NULL, CSI"%i;%iH", pos.y, pos.x);
 }
 
 void nudge_cursor(dir_t direction, uint32_t step)
@@ -54,5 +54,5 @@ void nudge_cursor(dir_t direction, uint32_t step)
         case LEFT:  end_ch = 'D';
     }
 
-    printmsg(CSI"%i%c", step, end_ch);
+    printws(NULL, CSI"%i%c", step, end_ch);
 }
