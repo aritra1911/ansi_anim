@@ -60,6 +60,7 @@ static inline void disable_raw_mode(void)
 int main(void)
 {
     char c;
+    system("clear");
 
     enable_raw_mode();
 

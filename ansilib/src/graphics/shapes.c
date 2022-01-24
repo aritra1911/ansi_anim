@@ -40,3 +40,35 @@ void draw_rectangle(uint32_t width, uint32_t height, char ch)
         printmsg("%c", ch);
     }
 }
+
+void draw_triangle( uint32_t height, char ch)
+{
+  /*  Draws a triangle, on the basis of height   */
+
+    for (uint32_t i = 0; i < height - 1; i++) {
+
+        /* TODO: Add fill character argument.
+         *       If fill character is not '\0', we should fill the
+         *       rectangle with that character. */
+
+        /* Get to the next line */
+        nudge_cursor(LEFT, width);
+        nudge_cursor(DOWN, 1);
+
+        /* Left edges */
+        printmsg("%c", ch);
+
+        /* Right edges */
+        nudge_cursor(RIGHT, width - 2);
+        printmsg("%c", ch);
+    }
+
+    /* Get to the next line */
+    nudge_cursor(LEFT, width);
+    nudge_cursor(DOWN, 1);
+
+    /* Bottom edge */
+    for (uint32_t i = 0; i < width; i++) {
+        printmsg("%c", ch);
+    }
+}
