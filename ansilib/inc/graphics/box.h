@@ -5,6 +5,7 @@
 
 typedef enum {
     RECTANGLE,
+    TRIANGLE,
 } shape_t;
 
 typedef struct {
