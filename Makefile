@@ -5,21 +5,24 @@ LIB =
 
 CFLAGS = $(INC) -Wall -Wextra -pedantic -g -std=c99
 CPPFLAGS =
-LDFLAGS =
+LDFLAGS = $(LIB)
 
-SRCS = src/io.c \
-       src/main.c \
-       ansilib/src/ansi/cursor.c \
+SRCS = src/main.c \
+       src/io.c \
        ansilib/src/ansi/screen.c \
+       ansilib/src/ansi/cursor.c \
+       ansilib/src/ansi/style.c \
        ansilib/src/graphics/common.c \
        ansilib/src/graphics/box.c \
        ansilib/src/graphics/shapes.c
 
 
-OBJS = obj/io.o \
-       obj/main.o \
-       obj/ansi/cursor.o \
+
+OBJS = obj/main.o \
+       obj/io.o \
        obj/ansi/screen.o \
+       obj/ansi/cursor.o \
+       obj/ansi/style.o \
        obj/graphics/common.o \
        obj/graphics/box.o \
        obj/graphics/shapes.o

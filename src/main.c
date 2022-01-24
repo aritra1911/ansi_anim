@@ -7,6 +7,7 @@
 #include <io.h>
 #include <ansi/cursor.h>
 #include <ansi/screen.h>
+#include <ansi/colors.h>
 #include <graphics/common.h>
 #include <graphics/box.h>
 
@@ -60,26 +61,36 @@ static inline void disable_raw_mode(void)
 int main(void)
 {
     char c;
-    //system("clear");TODO
 
     enable_raw_mode();
 
-    /* print out screen size */
     point_t screen_size = get_screen_size();
-    printf("LINES = %i  COLUMNS = %i\r\n", screen_size.y, screen_size.x);
+
+    style_t test_style[] = {
+        { GREEN_FG, 0, BOLD },
+        { YELLOW_FG, 0, 0 },
+        { WHITE_FG, MAGENTA_BG, BOLD | UNDERLINE },
+    };
+
+    printws(&test_style[2], "The quick brown fox jumps over the lazy dog.");
+    printws(NULL, "\r\n");
+    printws(&test_style[0], "LINES = %i", screen_size.y);
+    printws(NULL, "\r\n");
+    printws(&test_style[1], "COLUMNS = %i", screen_size.x);
+    printws(NULL, "\r\n");
 
     /* Draw beautiful geometric rectangles of various sizes at various
      * places all over the screen. */
     box_t rects[] = {
         { RECTANGLE, { 20, 12 }, 12, 13 },
         { RECTANGLE, { 52,  7 },  7,  8 },
-        { RECTANGLE, { 42, 30 }, 20, 16 },
+        { RECTANGLE, { 49, 30 }, 20, 16 },
         { RECTANGLE, { 72, 12 }, 32, 16 },
         {  TRIANGLE, { 10, 10 },  0,  9 },   //TODO
     };
 
     point_t orig_cursor_pos = get_cursor_pos();
-    for (int i = 0; i < sizeof(rects)/sizeof(box_t) ; i++) {
+    for (size_t i = 0; i < sizeof(rects)/sizeof(box_t) ; i++) {
         draw(&rects[i]);
     }
     move_cursor(orig_cursor_pos);
@@ -87,20 +98,22 @@ int main(void)
     dir_t dir = DOWN;
 
     while ( 1 ) {
+
+        /* Bounce rect[2] up an d down */
+        if ( rects[2].origin.y + rects[2].height + 4 > screen_size.y ) {
+            dir = UP;
+        } else if ( rects[2].origin.y - 4 < 1 ) {
+            dir = DOWN;
+        }
+        orig_cursor_pos = get_cursor_pos();
+        erase(&rects[2]);
+        nudge(&rects[2], dir, 4);
+        draw(&rects[2]);
+        move_cursor(orig_cursor_pos);
+
         /* Read a byte from the standard input */
-        while ( read(STDIN_FILENO, &c, 1) < 1 ) {
-
-            if ( rects[2].origin.y + rects[2].height + 4 > screen_size.y ) {
-                dir = UP;
-            } else if ( rects[2].origin.y - 4 < 1 ) {
-                dir = DOWN;
-            }
-
-            orig_cursor_pos = get_cursor_pos();
-            erase(&rects[2]);
-            nudge(&rects[2], dir, 4);
-            draw(&rects[2]);
-            move_cursor(orig_cursor_pos);
+        if ( read(STDIN_FILENO, &c, 1) < 1 ) {
+            continue;
         }
 
         if ( !iscntrl(c) ) {

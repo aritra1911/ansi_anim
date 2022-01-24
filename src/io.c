@@ -4,8 +4,9 @@
 #include <string.h>
 
 #include <io.h>
+#include <ansi/style.h>
 
-int printmsg(const char *format, ...)
+int printws(const style_t *style, const char *format, ...)
 {
     char str[SEND_BUF_SIZ];
     va_list args;
@@ -16,36 +17,18 @@ int printmsg(const char *format, ...)
     bytes = vsnprintf(str, SEND_BUF_SIZ, format, args);
     va_end(args);
 
+    if ( style ) set_style(style);
+
     if ( bytes >= 0 ) {
         /* `vsnprintf()` didn't report an error */
         str[SEND_BUF_SIZ - 1] = '\0';
         write(STDOUT_FILENO, (void *) str, strlen(str));
     }
 
-    return bytes;
-}
-
-int printmsgln(const char *format, ...)
-{
-    char str[SEND_BUF_SIZ];
-    va_list args;
-    int bytes;
-
-    /* extract the arg list using va apis */
-    va_start(args, format);
-    bytes = vsnprintf(str, SEND_BUF_SIZ - 2, format, args);
-    va_end(args);
-
-    if ( bytes >= 0 ) {
-        /* `vsnprintf()` didn't report an error */
-        strcpy(str, "\r\n");
-        str[SEND_BUF_SIZ - 1] = '\0';
-        write(STDOUT_FILENO, (void *) str, strlen(str));
-    }
+    if ( style ) reset_all();
 
     return bytes;
 }
-
 
 int scanmsg(const char *format, ...)
 {
