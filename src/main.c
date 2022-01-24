@@ -75,7 +75,7 @@ int main(void)
         { RECTANGLE, { 52,  7 },  7,  8 },
         { RECTANGLE, { 42, 30 }, 20, 16 },
         { RECTANGLE, { 72, 12 }, 32, 16 },
-        {  TRIANGLE, { 10, 10 },  0,  5 },   //TODO
+        {  TRIANGLE, { 10, 10 },  0,  9 },   //TODO
     };
 
     point_t orig_cursor_pos = get_cursor_pos();
