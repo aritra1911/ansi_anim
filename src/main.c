@@ -75,10 +75,11 @@ int main(void)
         { RECTANGLE, { 52,  7 },  7,  8 },
         { RECTANGLE, { 42, 30 }, 20, 16 },
         { RECTANGLE, { 72, 12 }, 32, 16 },
+        {  TRIANGLE, { 10, 10 },  0,  5 }   //TODO
     };
 
     point_t orig_cursor_pos = get_cursor_pos();
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
         draw(&rects[i]);
     }
     move_cursor(orig_cursor_pos);
