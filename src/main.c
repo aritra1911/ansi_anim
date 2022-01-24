@@ -61,7 +61,6 @@ static inline void disable_raw_mode(void)
 int main(void)
 {
     char c;
-    //system("clear");TODO
 
     enable_raw_mode();
 
@@ -87,11 +86,11 @@ int main(void)
         { RECTANGLE, { 52,  7 },  7,  8 },
         { RECTANGLE, { 49, 30 }, 20, 16 },
         { RECTANGLE, { 72, 12 }, 32, 16 },
-        {  TRIANGLE, { 10, 10 },  0,  5 },   //TODO
+        {  TRIANGLE, { 10, 10 },  0,  5 },
     };
 
     point_t orig_cursor_pos = get_cursor_pos();
-    for (int i = 0; i < sizeof(rects)/sizeof(box_t) ; i++) {
+    for (size_t i = 0; i < sizeof(rects)/sizeof(box_t) ; i++) {
         draw(&rects[i]);
     }
     move_cursor(orig_cursor_pos);
@@ -99,20 +98,22 @@ int main(void)
     dir_t dir = DOWN;
 
     while ( 1 ) {
+
+        /* Bounce rect[2] up an d down */
+        if ( rects[2].origin.y + rects[2].height + 4 > screen_size.y ) {
+            dir = UP;
+        } else if ( rects[2].origin.y - 4 < 1 ) {
+            dir = DOWN;
+        }
+        orig_cursor_pos = get_cursor_pos();
+        erase(&rects[2]);
+        nudge(&rects[2], dir, 4);
+        draw(&rects[2]);
+        move_cursor(orig_cursor_pos);
+
         /* Read a byte from the standard input */
-        while ( read(STDIN_FILENO, &c, 1) < 1 ) {
-
-            if ( rects[2].origin.y + rects[2].height + 4 > screen_size.y ) {
-                dir = UP;
-            } else if ( rects[2].origin.y - 4 < 1 ) {
-                dir = DOWN;
-            }
-
-            orig_cursor_pos = get_cursor_pos();
-            erase(&rects[2]);
-            nudge(&rects[2], dir, 4);
-            draw(&rects[2]);
-            move_cursor(orig_cursor_pos);
+        if ( read(STDIN_FILENO, &c, 1) < 1 ) {
+            continue;
         }
 
         if ( !iscntrl(c) ) {
@@ -141,7 +142,7 @@ int main(void)
                     break;
 
                 case 'l':
-                    if ( rects[0].origin.x + rects[0].width <= screen_size.x ) {
+                    if ( rects[0].origin.x + rects[0].width < screen_size.x ) {
                         nudge(&rects[0], RIGHT, 1);
                     }
                     break;
