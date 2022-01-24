@@ -1,4 +1,5 @@
 #include <ansi/cursor.h>
+#include <ansi/colors.h>
 #include <graphics/shapes.h>
 
 #include <io.h>
