@@ -54,7 +54,7 @@ void draw_triangle( uint32_t height, char ch)
          *       rectangle with that character. */
 
         /* right arm*/
-        printmsg("%c", ch);
+        printws(NULL, "%c", ch);
         nudge_cursor(DOWN, 1);
 
     }
@@ -62,7 +62,7 @@ void draw_triangle( uint32_t height, char ch)
     /* Bottom side  */
     nudge_cursor(LEFT, 2*(height-1) );
     for(uint32_t i = 2*(height - 1) +1 ; i > 0; i--)
-      printmsg("%c", ch);
+      printws(NULL, "%c", ch);
     nudge_cursor(LEFT, 2*(height-1) + 1);
 
     for (uint32_t i = 0; i < height - 1; i++) {
@@ -72,7 +72,7 @@ void draw_triangle( uint32_t height, char ch)
          *       rectangle with that character. */
 
         /* right arm*/
-        printmsg("%c", ch);
+        printws(NULL, "%c", ch);
         nudge_cursor(UP, 1);
 
     }
