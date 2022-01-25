@@ -21,16 +21,14 @@ void draw(const box_t *box)
 
 void erase(const box_t *box)
 {
-    const style_t null = { DONT_CHANGE, DONT_CHANGE, DONT_CHANGE };
-
     switch ( box->type ) {
     case RECTANGLE:
         move_cursor(box->origin);
-        draw_rectangle(&null, box->width, box->height, ' ');
+        draw_rectangle(NULL, box->width, box->height, ' ');
         break;
     case TRIANGLE:
         move_cursor(box->origin);
-        draw_triangle(&null, box->height, ' ');
+        draw_triangle(NULL, box->height, ' ');
         break;
     }
 }
