@@ -65,6 +65,7 @@ int main(void)
     enable_raw_mode();
 
     screen_t screen_size = get_screen_size();
+    clr_scr();
 
     style_t test_style[] = {
         { GREEN_FG, 0, BOLD },
@@ -154,5 +155,6 @@ int main(void)
         }
     }
 
+    clr_scr();
     return EXIT_SUCCESS;
 }
