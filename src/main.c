@@ -69,7 +69,7 @@ int main(void)
 
     style_t test_style[] = {
         { GREEN_FG, 0, BOLD },
-        { YELLOW_FG, 0, 0 },
+        { YELLOW_FG, 0, BLINKING },
         { WHITE_FG, MAGENTA_BG, BOLD | UNDERLINE },
     };
 
@@ -83,11 +83,11 @@ int main(void)
     /* Draw beautiful geometric rectangles of various sizes at various
      * places all over the screen. */
     box_t rects[] = {
-        { RECTANGLE, { 20, 12 }, 12, 13 },
-        { RECTANGLE, { 52,  7 },  7,  8 },
-        { RECTANGLE, { 49, 30 }, 20, 16 },
-        { RECTANGLE, { 72, 12 }, 32, 16 },
-        {  TRIANGLE, { 10, 10 },  0,  9 },   //TODO
+        { RECTANGLE, { 20, 12 },test_style[0],  12, 13 },
+        { RECTANGLE, { 52,  7 },test_style[2],   7,  8 },
+        { RECTANGLE, { 49, 30 },test_style[0],  20, 16 },
+        { RECTANGLE, { 72, 12 },test_style[2],  32, 16 },
+        {  TRIANGLE, { 10, 10 },test_style[1],  0,  9 },   
     };
 
     point_t orig_cursor_pos = get_cursor_pos();

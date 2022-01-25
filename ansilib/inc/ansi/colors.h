@@ -58,6 +58,7 @@ typedef enum {
     INVERSE      = (1 << 5),
     INVISIBLE    = (1 << 6),
     STRIKE       = (1 << 7),
+    NONE         = (1 << 8),
 } mode_t;
 
 #endif  /* __ANSI_COLORS_H_ */
