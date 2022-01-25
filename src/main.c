@@ -64,7 +64,7 @@ int main(void)
 
     enable_raw_mode();
 
-    point_t screen_size = get_screen_size();
+    screen_t screen_size = get_screen_size();
 
     style_t test_style[] = {
         { GREEN_FG, 0, BOLD },
@@ -74,9 +74,9 @@ int main(void)
 
     printws(&test_style[2], "The quick brown fox jumps over the lazy dog.");
     printws(NULL, "\r\n");
-    printws(&test_style[0], "LINES = %i", screen_size.y);
+    printws(&test_style[0], "LINES = %u", screen_size.lines);
     printws(NULL, "\r\n");
-    printws(&test_style[1], "COLUMNS = %i", screen_size.x);
+    printws(&test_style[1], "COLUMNS = %u", screen_size.cols);
     printws(NULL, "\r\n");
 
     /* Draw beautiful geometric rectangles of various sizes at various
@@ -100,7 +100,7 @@ int main(void)
     while ( 1 ) {
 
         /* Bounce rect[2] up an d down */
-        if ( rects[2].origin.y + rects[2].height + 4 > screen_size.y ) {
+        if ( rects[2].origin.y + rects[2].height + 4 > screen_size.lines ) {
             dir = UP;
         } else if ( rects[2].origin.y - 4 < 1 ) {
             dir = DOWN;
@@ -130,7 +130,7 @@ int main(void)
                     break;
 
                 case 'j':
-                    if ( rects[0].origin.y + rects[0].height <= screen_size.y ) {
+                    if ( rects[0].origin.y + rects[0].height <= screen_size.lines ) {
                         nudge(&rects[0], DOWN, 1);
                     }
                     break;
@@ -142,7 +142,7 @@ int main(void)
                     break;
 
                 case 'l':
-                    if ( rects[0].origin.x + rects[0].width < screen_size.x ) {
+                    if ( rects[0].origin.x + rects[0].width < screen_size.cols ) {
                         nudge(&rects[0], RIGHT, 1);
                     }
                     break;

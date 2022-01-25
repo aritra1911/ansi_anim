@@ -1,8 +1,10 @@
 #include <ansi/cursor.h>
+#include <ansi/screen.h>
 
-point_t get_screen_size(void)
+screen_t get_screen_size(void)
 {
-    point_t ret, orig_pos = get_cursor_pos();
+    screen_t ret;
+    point_t orig_pos = get_cursor_pos(), temp;
 
     /* Quoting from
      * https://viewsourcecode.org/snaptoken/kilo/03.rawInputAndOutput.html#window-size-the-hard-way
@@ -18,7 +20,9 @@ point_t get_screen_size(void)
      */
     nudge_cursor(RIGHT, 999);
     nudge_cursor(DOWN, 999);
-    ret = get_cursor_pos();
+    temp =  get_cursor_pos();
+    ret.cols  = (uint32_t) temp.x;
+    ret.lines = (uint32_t) temp.y;
 
     move_cursor(orig_pos);
     return ret;

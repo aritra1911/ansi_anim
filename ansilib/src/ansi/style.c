@@ -21,7 +21,7 @@ static char *get_mode_str(mode_t m, char *mode_str)
         }
 
         /* No six? Skip six! */
-        barf = barf == 5 ? 7 : barf + 1;
+        barf = (barf == 5) ? 7 : barf + 1;
         m >>= 1;
     }
 
