@@ -21,7 +21,7 @@ static char *get_mode_str(mode_t m, char *mode_str)
         }
 
         /* No six? Skip six! */
-        barf = barf == 5 ? 7 : barf + 1;
+        barf = (barf == 5) ? 7 : barf + 1;
         m >>= 1;
     }
 
@@ -60,4 +60,10 @@ void set_style(const style_t *s)
 void reset_all(void)
 {
     printws(NULL, CSI"0m");
+}
+
+void clr_scr(void){
+  printws(NULL, "\033[H");
+  printws(NULL, "\033[2J");
+
 }
