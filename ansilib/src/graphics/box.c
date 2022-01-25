@@ -21,7 +21,7 @@ void draw(const box_t *box)
 
 void erase(const box_t *box)
 {
-  style_t null = {0,0,NONE};
+  style_t null = {0,0,0};
     switch ( box->type ) {
     case RECTANGLE:
         move_cursor(box->origin);
