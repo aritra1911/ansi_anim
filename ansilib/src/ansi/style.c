@@ -61,9 +61,3 @@ void reset_all(void)
 {
     printws(NULL, CSI"0m");
 }
-
-void clr_scr(void){
-  printws(NULL, "\033[H");
-  printws(NULL, "\033[2J");
-
-}

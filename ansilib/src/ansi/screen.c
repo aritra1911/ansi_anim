@@ -1,3 +1,7 @@
+#include <stddef.h>
+
+#include <io.h>
+#include <ansi/common.h>
 #include <ansi/cursor.h>
 #include <ansi/screen.h>
 
@@ -27,3 +31,9 @@ screen_t get_screen_size(void)
     move_cursor(orig_pos);
     return ret;
 }
+
+void clear_screen(void)
+{
+    printws(NULL, CSI"H"CSI"2J");
+}
+

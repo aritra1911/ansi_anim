@@ -63,9 +63,9 @@ int main(void)
     char c;
 
     enable_raw_mode();
+    clear_screen(); /* TODO: Enter alternate screen instead ?? */
 
     screen_t screen_size = get_screen_size();
-    clr_scr();
 
     style_t test_style[] = {
         { GREEN_FG, 0, BOLD },
@@ -87,7 +87,7 @@ int main(void)
         { RECTANGLE, { 52,  7 },  7,  8 },
         { RECTANGLE, { 49, 30 }, 20, 16 },
         { RECTANGLE, { 72, 12 }, 32, 16 },
-        {  TRIANGLE, { 10, 10 },  0,  9 },   //TODO
+        {  TRIANGLE, { 10, 10 },  0,  9 },
     };
 
     point_t orig_cursor_pos = get_cursor_pos();
@@ -155,6 +155,6 @@ int main(void)
         }
     }
 
-    clr_scr();
+    clear_screen();
     return EXIT_SUCCESS;
 }

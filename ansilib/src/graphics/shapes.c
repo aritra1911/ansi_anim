@@ -8,10 +8,10 @@
 
 void draw_rectangle(uint32_t width, uint32_t height, char ch)
 {
-  style_t blink= {
-    BRIGHT_GREEN_FG,  DEFAULT_BG,
-    BLINKING
-  };
+    style_t blink= {
+        BRIGHT_GREEN_FG,  DEFAULT_BG,
+        BLINKING
+    };
     /* Top edge */
     for (uint32_t i = 0; i < width; i++) {
         /* TODO: This character should be an argument such as
@@ -51,11 +51,11 @@ void draw_rectangle(uint32_t width, uint32_t height, char ch)
 
 void draw_triangle( uint32_t height, char ch)
 {
-  /*  Draws a triangle, on the basis of height   */
-  style_t underline = {
-    BRIGHT_RED_FG,  DEFAULT_BG,
-    UNDERLINE
-  };
+    /*  Draws a triangle, on the basis of height   */
+    style_t underline = {
+        BRIGHT_RED_FG,  DEFAULT_BG,
+        UNDERLINE
+    };
 
     for (uint32_t i = 0; i < height - 1; i++) {
 
@@ -72,7 +72,7 @@ void draw_triangle( uint32_t height, char ch)
     /* Bottom side  */
     nudge_cursor(LEFT, 2*(height-1) );
     for(uint32_t i = 2*(height - 1) +1 ; i > 0; i--)
-      printws(&underline, "%c", ch);
+        printws(&underline, "%c", ch);
     nudge_cursor(LEFT, 2*(height-1) + 1);
 
     for (uint32_t i = 0; i < height - 1; i++) {
@@ -81,7 +81,7 @@ void draw_triangle( uint32_t height, char ch)
          *       If fill character is not '\0', we should fill the
          *       rectangle with that character. */
 
-        /* right arm*/
+        /* left arm*/
         printws(&underline, "%c", ch);
         nudge_cursor(UP, 1);
 
