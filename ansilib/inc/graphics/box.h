@@ -2,6 +2,7 @@
 # define __GRAPHICS_BOX_H_
 
 # include <graphics/common.h>
+# include <ansi/style.h>
 
 typedef enum {
     RECTANGLE,
@@ -11,6 +12,7 @@ typedef enum {
 typedef struct {
     shape_t type;
     point_t origin;
+    style_t style;
     uint32_t width, height;
 } box_t;
 

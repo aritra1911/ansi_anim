@@ -1,8 +1,10 @@
 #ifndef __ANSI_COLORS_H_
 # define __ANSI_COLORS_H_
 
+# define DONT_CHANGE 0
+
 typedef enum {
-    DONT_CHANGE=0,
+    /* DONT_CHANGE=0, */
 
     /* Foreground colors */
     BLACK_FG=30,
@@ -50,14 +52,15 @@ typedef enum {
 } color_t;
 
 typedef enum {
-    BOLD         = (1 << 0),
-    FAINT        = (1 << 1),
-    ITALIC       = (1 << 2),
-    UNDERLINE    = (1 << 3),
-    BLINKING     = (1 << 4),
-    INVERSE      = (1 << 5),
-    INVISIBLE    = (1 << 6),
-    STRIKE       = (1 << 7),
+    /* DONT_CHANGE = 0, */
+    BOLD        = (1 << 0),
+    FAINT       = (1 << 1),
+    ITALIC      = (1 << 2),
+    UNDERLINE   = (1 << 3),
+    BLINKING    = (1 << 4),
+    INVERSE     = (1 << 5),
+    INVISIBLE   = (1 << 6),
+    STRIKE      = (1 << 7),
 } mode_t;
 
 #endif  /* __ANSI_COLORS_H_ */
