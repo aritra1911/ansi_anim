@@ -21,7 +21,7 @@ void draw(const box_t *box)
 
 void erase(const box_t *box)
 {
-    const style_t null = { DONT_CHANGE, BLACK_BG, DONT_CHANGE };
+    const style_t null = { DONT_CHANGE, DONT_CHANGE, DONT_CHANGE };
 
     switch ( box->type ) {
     case RECTANGLE:
