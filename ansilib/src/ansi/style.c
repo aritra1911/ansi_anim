@@ -6,7 +6,7 @@
 #include <ansi/colors.h>
 #include <ansi/style.h>
 
-static char *get_mode_str(mode_t m, char *mode_str)
+static char *get_text_mode_str(text_mode_t m, char *mode_str)
 {
     int  barf = 1;
     char temp[4];
@@ -30,14 +30,14 @@ static char *get_mode_str(mode_t m, char *mode_str)
 
 void set_style(const style_t *s)
 {
-    char mode_str[32],
+    char text_mode_str[32],
          buf[32],
          temp[32];
 
     sprintf(buf, CSI);
 
-    get_mode_str(s->mode_bm, mode_str);
-    strcat(buf, *mode_str ? mode_str : "0;");
+    get_text_mode_str(s->text_mode_mask, text_mode_str);
+    strcat(buf, *text_mode_str ? text_mode_str : "0;");
 
     if ( s->fg ) {
         sprintf(temp, "%i;", s->fg);

@@ -5,7 +5,7 @@
 
 typedef struct {
     color_t fg, bg;
-    mode_t mode_bm;
+    text_mode_t text_mode_mask;
 } style_t;
 
 void set_style(const style_t *);
