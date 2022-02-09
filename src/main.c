@@ -73,17 +73,21 @@ int main(void)
             text_mode_t text_mode_mask;
        } style_t;
      */
-    style_t test_style[] = {
-        { MAGENTA_FG,  YELLOW_BG,   GREEN_FG,  DONT_CHANGE,        BOLD       },
-        { DONT_CHANGE, DONT_CHANGE, YELLOW_FG, DONT_CHANGE,      BLINKING     },
-        { DONT_CHANGE, BLUE_BG, WHITE_FG,  MAGENTA_BG,  BOLD | UNDERLINE },
+
+    obj_style_t test_style[] = {
+        { { MAGENTA_FG,  YELLOW_BG,   BOLD },
+          { GREEN_FG,    DONT_CHANGE, BOLD } },
+        { { DONT_CHANGE, DONT_CHANGE, BLINKING },
+          { YELLOW_FG,   DONT_CHANGE, BLINKING } },
+        { { DONT_CHANGE, BLUE_BG,     BOLD | UNDERLINE },
+          { WHITE_FG,    MAGENTA_BG,  BOLD | UNDERLINE } },
     };
 
-    printws(&test_style[2], "The quick brown fox jumps over the lazy dog.");
+    printws(&test_style[2].inner, "The quick brown fox jumps over the lazy dog.");
     printws(NULL, "\r\n");
-    printws(&test_style[0], "LINES = %u", screen_size.lines);
+    printws(&test_style[0].inner, "LINES = %u", screen_size.lines);
     printws(NULL, "\r\n");
-    printws(&test_style[1], "COLUMNS = %u", screen_size.cols);
+    printws(&test_style[1].inner, "COLUMNS = %u", screen_size.cols);
     printws(NULL, "\r\n");
 
     /* Draw beautiful geometric rectangles of various sizes at various

@@ -3,11 +3,14 @@
 
 # include <ansi/colors.h>
 
-typedef struct {
-    color_t internal_fg, internal_bg;
-    color_t border_fg, border_bg;
-    text_mode_t text_mode_mask;
+typedef struct{
+    color_t fg,bg;
+    text_mode_t mode_mask;
 } style_t;
+
+typedef struct{
+    style_t inner, border;
+} obj_style_t;
 
 void set_style(const style_t *);
 void reset_all(void);
