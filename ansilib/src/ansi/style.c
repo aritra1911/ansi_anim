@@ -39,13 +39,13 @@ void set_style(const style_t *s)
     get_text_mode_str(s->text_mode_mask, text_mode_str);
     strcat(buf, *text_mode_str ? text_mode_str : "0;");
 
-    if ( s->fg ) {
-        sprintf(temp, "%i;", s->fg);
+    if ( s->border_fg ) {
+        sprintf(temp, "%i;", s->border_fg);
         strcat(buf, temp);
     }
 
-    if ( s->bg ) {
-        sprintf(temp, "%i;", s->bg);
+    if ( s->border_bg ) {
+        sprintf(temp, "%i;", s->border_bg);
         strcat(buf, temp);
     }
 

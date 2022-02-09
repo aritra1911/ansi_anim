@@ -66,11 +66,17 @@ int main(void)
     clear_screen(); /* TODO: Enter alternate screen instead ?? */
 
     screen_t screen_size = get_screen_size();
-
+    /*
+       typedef struct {
+            color_t internal_fg, internal_bg;
+            color_t border_fg, border_bg;
+            text_mode_t text_mode_mask;
+       } style_t;
+     */
     style_t test_style[] = {
-        {  GREEN_FG,  DONT_CHANGE,        BOLD       },
-        { YELLOW_FG,  DONT_CHANGE,      BLINKING     },
-        {  WHITE_FG,   MAGENTA_BG,  BOLD | UNDERLINE },
+        { MAGENTA_FG,  YELLOW_BG,   GREEN_FG,  DONT_CHANGE,        BOLD       },
+        { DONT_CHANGE, DONT_CHANGE, YELLOW_FG, DONT_CHANGE,      BLINKING     },
+        { DONT_CHANGE, BLUE_BG, WHITE_FG,  MAGENTA_BG,  BOLD | UNDERLINE },
     };
 
     printws(&test_style[2], "The quick brown fox jumps over the lazy dog.");

@@ -4,7 +4,8 @@
 # include <ansi/colors.h>
 
 typedef struct {
-    color_t fg, bg;
+    color_t internal_fg, internal_bg;
+    color_t border_fg, border_bg;
     text_mode_t text_mode_mask;
 } style_t;
 

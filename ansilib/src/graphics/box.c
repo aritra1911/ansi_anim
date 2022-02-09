@@ -10,11 +10,11 @@ void draw(const box_t *box)
     switch ( box->type ) {
     case RECTANGLE:
         move_cursor(box->origin);
-        draw_rectangle(&box->style, box->width, box->height, '#');
+        draw_rectangle(&box->style, box->width, box->height, '#', '/');
         break;
     case TRIANGLE:
         move_cursor(box->origin);
-        draw_triangle(&box->style,  box->height, '*');
+        draw_triangle(&box->style,  box->height, '*', '^');
         break;
     }
 }
@@ -24,11 +24,11 @@ void erase(const box_t *box)
     switch ( box->type ) {
     case RECTANGLE:
         move_cursor(box->origin);
-        draw_rectangle(NULL, box->width, box->height, ' ');
+        draw_rectangle(NULL, box->width, box->height, ' ', ' ');
         break;
     case TRIANGLE:
         move_cursor(box->origin);
-        draw_triangle(NULL, box->height, ' ');
+        draw_triangle(NULL, box->height, ' ', ' ');
         break;
     }
 }
