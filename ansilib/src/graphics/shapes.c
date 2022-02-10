@@ -5,8 +5,8 @@
 #include <ansi/style.h>
 #include <graphics/shapes.h>
 
-
-void draw_rectangle(const obj_style_t *style, uint32_t width, uint32_t height, char ch, char fill_ch)
+void draw_rectangle(const obj_style_t *style, uint32_t width, uint32_t height,
+                    char ch, char fill_ch)
 {
 
     const style_t *inner_ptr = style ? &style->inner : NULL;
@@ -14,17 +14,11 @@ void draw_rectangle(const obj_style_t *style, uint32_t width, uint32_t height, c
 
     /* Top edge */
     for (uint32_t i = 0; i < width; i++) {
-        /* TODO: This character should be an argument such as
-         *       `border_char`. Also, let's not forget about
-         *       `border_width` */
+        /* TODO: Let's not forget about `border_width` */
         printws(border_ptr, "%c", ch);
     }
 
     for (uint32_t i = 0; i < height - 2; i++) {
-
-        /* TODO: Add fill character argument.
-         *       If fill character is not '\0', we should fill the
-         *       rectangle with that character. */
 
         /* Get to the next line */
         nudge_cursor(LEFT, width);
@@ -62,10 +56,6 @@ void draw_triangle(const obj_style_t *style, uint32_t height, char ch, char fill
 
     for (uint32_t i = 0; i < height - 1; i++) {
 
-        /* TODO: Add fill character argument.
-         *       If fill character is not '\0', we should fill the
-         *       rectangle with that character. */
-
         /* right arm*/
         printws(border_ptr , "%c", ch);
         nudge_cursor(DOWN, 1);
@@ -80,10 +70,6 @@ void draw_triangle(const obj_style_t *style, uint32_t height, char ch, char fill
 
     for (uint32_t i = 0; i < height - 1; i++) {
 
-        /* TODO: Add fill character argument.
-         *       If fill character is not '\0', we should fill the
-         *       rectangle with that character. */
-
         /* left arm*/
         printws(border_ptr, "%c", ch);
         nudge_cursor(UP, 1);
@@ -95,10 +81,10 @@ void draw_triangle(const obj_style_t *style, uint32_t height, char ch, char fill
 
     /* Filling internal colour */
     for (uint32_t i = 0; i < height - 2; i++) {
-        
+
         for (uint32_t j = 0; j < 2*temp - 1; j++)
             printws(inner_ptr, "%c", fill_ch);
-        
+
         nudge_cursor(DOWN, 1);
         nudge_cursor(LEFT, 2*temp);
         temp++;

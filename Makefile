@@ -3,7 +3,7 @@ CC ?= cc
 INC = -Iinc -Iansilib/inc
 LIB =
 
-CFLAGS = $(INC) -Wall -Wextra -pedantic -g -std=c99
+CFLAGS = $(INC) -Wall -Wextra -pedantic -g -O0 -std=c99
 CPPFLAGS =
 LDFLAGS = $(LIB)
 
