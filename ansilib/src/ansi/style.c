@@ -36,7 +36,7 @@ void set_style(const style_t *s)
 
     sprintf(buf, CSI);
 
-    get_text_mode_str(s->text_mode_mask, text_mode_str);
+    get_text_mode_str(s->mode_mask, text_mode_str);
     strcat(buf, *text_mode_str ? text_mode_str : "0;");
 
     if ( s->fg ) {

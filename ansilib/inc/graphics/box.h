@@ -12,7 +12,7 @@ typedef enum {
 typedef struct {
     shape_t type;
     point_t origin;
-    style_t style;
+    obj_style_t style;
     uint32_t width, height;
 } box_t;
 

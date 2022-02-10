@@ -6,14 +6,18 @@
 #include <graphics/shapes.h>
 
 
-void draw_rectangle(const style_t *style, uint32_t width, uint32_t height, char ch)
+void draw_rectangle(const obj_style_t *style, uint32_t width, uint32_t height, char ch, char fill_ch)
 {
+
+    const style_t *inner_ptr = style ? &style->inner : NULL;
+    const style_t *border_ptr = style ? &style->border : NULL;
+
     /* Top edge */
     for (uint32_t i = 0; i < width; i++) {
         /* TODO: This character should be an argument such as
          *       `border_char`. Also, let's not forget about
          *       `border_width` */
-        printws(style, "%c", ch);
+        printws(border_ptr, "%c", ch);
     }
 
     for (uint32_t i = 0; i < height - 2; i++) {
@@ -27,11 +31,15 @@ void draw_rectangle(const style_t *style, uint32_t width, uint32_t height, char 
         nudge_cursor(DOWN, 1);
 
         /* Left edges */
-        printws(style, "%c", ch);
+        printws(border_ptr, "%c", ch);
+
+        /* Filling internal colour */
+        if(fill_ch != '\0')
+            for (uint32_t i = 0; i < width - 2; i++)
+                printws(inner_ptr, "%c", fill_ch);
 
         /* Right edges */
-        nudge_cursor(RIGHT, width - 2);
-        printws(style, "%c", ch);
+        printws(border_ptr, "%c", ch);
     }
 
     /* Get to the next line */
@@ -40,12 +48,16 @@ void draw_rectangle(const style_t *style, uint32_t width, uint32_t height, char 
 
     /* Bottom edge */
     for (uint32_t i = 0; i < width; i++) {
-        printws(style, "%c", ch);
+        printws(border_ptr, "%c", ch);
     }
 }
 
-void draw_triangle(const style_t *style, uint32_t height, char ch)
+void draw_triangle(const obj_style_t *style, uint32_t height, char ch, char fill_ch)
 {
+
+    const style_t *inner_ptr = style ? &style->inner : NULL;
+    const style_t *border_ptr = style ? &style->border : NULL;
+
     /*  Draws a triangle, on the basis of height   */
 
     for (uint32_t i = 0; i < height - 1; i++) {
@@ -55,7 +67,7 @@ void draw_triangle(const style_t *style, uint32_t height, char ch)
          *       rectangle with that character. */
 
         /* right arm*/
-        printws(style , "%c", ch);
+        printws(border_ptr , "%c", ch);
         nudge_cursor(DOWN, 1);
 
     }
@@ -63,7 +75,7 @@ void draw_triangle(const style_t *style, uint32_t height, char ch)
     /* Bottom side  */
     nudge_cursor(LEFT, 2*(height-1) );
     for(uint32_t i = 2*(height - 1) +1 ; i > 0; i--)
-        printws(style, "%c", ch);
+        printws(border_ptr, "%c", ch);
     nudge_cursor(LEFT, 2*(height-1) + 1);
 
     for (uint32_t i = 0; i < height - 1; i++) {
@@ -73,8 +85,23 @@ void draw_triangle(const style_t *style, uint32_t height, char ch)
          *       rectangle with that character. */
 
         /* left arm*/
-        printws(style, "%c", ch);
+        printws(border_ptr, "%c", ch);
         nudge_cursor(UP, 1);
+
+    }
+
+    uint32_t temp = 1;
+    nudge_cursor(DOWN, 1);
+
+    /* Filling internal colour */
+    for (uint32_t i = 0; i < height - 2; i++) {
+        
+        for (uint32_t j = 0; j < 2*temp - 1; j++)
+            printws(inner_ptr, "%c", fill_ch);
+        
+        nudge_cursor(DOWN, 1);
+        nudge_cursor(LEFT, 2*temp);
+        temp++;
 
     }
 }
