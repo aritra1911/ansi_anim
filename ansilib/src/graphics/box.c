@@ -10,11 +10,13 @@ void draw(const box_t *box)
     switch ( box->type ) {
     case RECTANGLE:
         move_cursor(box->origin);
-        draw_rectangle(&box->style, box->width, box->height, '#', '/');
+        draw_rectangle(&box->style, box->width, box->height,
+                       box->border_ch, box->fill_ch);
         break;
     case TRIANGLE:
         move_cursor(box->origin);
-        draw_triangle(&box->style,  box->height, '*', '^');
+        draw_triangle(&box->style, box->height,
+                      box->border_ch, box->fill_ch);
         break;
     }
 }

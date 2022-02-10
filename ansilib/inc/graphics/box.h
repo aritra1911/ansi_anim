@@ -14,6 +14,7 @@ typedef struct {
     point_t origin;
     obj_style_t style;
     uint32_t width, height;
+    char border_ch, fill_ch;
 } box_t;
 
 void draw(const box_t *box);
