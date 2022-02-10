@@ -68,24 +68,14 @@ int main(void)
     screen_t screen_size = get_screen_size();
 
     style_t test_style[] = {
-        /*   fg          bg              mode       */
-        { GREEN_FG,  DONT_CHANGE,        BOLD       },
-        { YELLOW_FG, DONT_CHANGE,      BLINKING     },
-        { WHITE_FG,  MAGENTA_BG,   BOLD | UNDERLINE },
-    };
-
-    obj_style_t obj_test_style[] = {
-
-        /*     fg            bg             mode       */
-
-        { { MAGENTA_FG,  YELLOW_BG,         BOLD       },
-          { GREEN_FG,    DONT_CHANGE,       BOLD       }, },
-
-        { { DONT_CHANGE, DONT_CHANGE,     BLINKING     },
-          { YELLOW_FG,   DONT_CHANGE,     BLINKING     }, },
-
-        { { DONT_CHANGE, BLUE_BG,     BOLD | UNDERLINE },
-          { WHITE_FG,    MAGENTA_BG,  BOLD | UNDERLINE }, },
+        /*   fg            bg             mode       */
+        { GREEN_FG,    DONT_CHANGE,       BOLD       }, /* [0] */
+        { YELLOW_FG,   DONT_CHANGE,     BLINKING     }, /* [1] */
+        { WHITE_FG,    MAGENTA_BG,  BOLD | UNDERLINE }, /* [2] */
+        { MAGENTA_FG,  YELLOW_BG,         BOLD       }, /* [3] */
+        { DONT_CHANGE, BLUE_BG,     BOLD | UNDERLINE }, /* [4] */
+        { DONT_CHANGE, DONT_CHANGE,     BLINKING     }, /* [5] */
+        { GREEN_FG,    DONT_CHANGE, BOLD | BLINKING  }, /* [6] */
     };
 
     printws(&test_style[2], "The quick brown fox jumps over the lazy dog.");
@@ -95,20 +85,48 @@ int main(void)
     printws(&test_style[1], "COLUMNS = %u", screen_size.cols);
     printws(NULL, "\r\n");
 
-    /* Draw beautiful geometric shapes of various sizes at various
-     * places all over the screen. */
-    box_t rects[] = {
-        /*  type       xx  yy         style          ww  hh  bc   fc  */
-        { RECTANGLE, { 20, 12 }, obj_test_style[0],  12, 13, '#', '/' },
-        { RECTANGLE, { 52,  7 }, obj_test_style[2],   7,  8, '$', '*' },
-        { RECTANGLE, { 49, 30 }, obj_test_style[0],  20, 16, '#', '/' },
-        { RECTANGLE, { 72, 12 }, obj_test_style[2],  32, 16, '#', '/' },
-        {  TRIANGLE, { 10, 10 }, obj_test_style[1],   0,  9, '*', '^' },
+    /* Prepare some demo shapes */
+    box_t shapes[] = {
+        {   /* [0] */
+            RECTANGLE,                      /*                     type */
+            { 20, 12 },                     /*                   origin */
+            test_style[0], test_style[3],   /*     border & fill styles */
+            12, 13,                         /*           width & height */
+            '#', '/',                       /* border & fill characters */
+        },
+        {   /* [1] */
+            RECTANGLE,
+            { 52, 7 },
+            test_style[2], test_style[4],
+            7, 8,
+            '*', '$',
+        },
+        {   /* [2] */
+            RECTANGLE,
+            { 49, 30 },
+            test_style[0], test_style[3],
+            20, 16,
+            '#', '/',
+        },
+        {   /* [3] */
+            RECTANGLE,
+            { 72, 12 },
+            test_style[2], test_style[4],
+            32, 16,
+            '#', '/',
+        },
+        {   /* [4] */
+            TRIANGLE,
+            { 10, 10 },
+            test_style[1], test_style[6],
+            0, 9,
+            '*', '^',
+        },
     };
 
     point_t orig_cursor_pos = get_cursor_pos();
-    for (size_t i = 0; i < sizeof(rects)/sizeof(box_t) ; i++) {
-        draw(&rects[i]);
+    for (size_t i = 0; i < sizeof(shapes)/sizeof(box_t) ; i++) {
+        draw(&shapes[i]);
     }
     move_cursor(orig_cursor_pos);
 
@@ -116,16 +134,16 @@ int main(void)
 
     while ( 1 ) {
 
-        /* Bounce rect[2] up an d down */
-        if ( rects[2].origin.y + rects[2].height + 4 > screen_size.lines ) {
+        /* Bounce rect[2] up and down */
+        if ( shapes[2].origin.y + shapes[2].height + 4 > screen_size.lines ) {
             dir = UP;
-        } else if ( rects[2].origin.y - 4 < 1 ) {
+        } else if ( shapes[2].origin.y - 4 < 1 ) {
             dir = DOWN;
         }
         orig_cursor_pos = get_cursor_pos();
-        erase(&rects[2]);
-        nudge(&rects[2], dir, 4);
-        draw(&rects[2]);
+        erase(&shapes[2]);
+        nudge(&shapes[2], dir, 4);
+        draw(&shapes[2]);
         move_cursor(orig_cursor_pos);
 
         /* Read a byte from the standard input */
@@ -137,35 +155,35 @@ int main(void)
             if ( c == 'q' ) break;
             else if ( c == 'h' || c == 'j' || c == 'k' || c == 'l' ) {
                 orig_cursor_pos = get_cursor_pos();
-                erase(&rects[0]);
+                erase(&shapes[0]);
 
                 switch ( c ) {
                 case 'h':
-                    if ( rects[0].origin.x > 1 ) {
-                        nudge(&rects[0], LEFT, 1);
+                    if ( shapes[0].origin.x > 1 ) {
+                        nudge(&shapes[0], LEFT, 1);
                     }
                     break;
 
                 case 'j':
-                    if ( rects[0].origin.y + rects[0].height <= screen_size.lines ) {
-                        nudge(&rects[0], DOWN, 1);
+                    if ( shapes[0].origin.y + shapes[0].height <= screen_size.lines ) {
+                        nudge(&shapes[0], DOWN, 1);
                     }
                     break;
 
                 case 'k':
-                    if ( rects[0].origin.y > 1 ) {
-                        nudge(&rects[0], UP, 1);
+                    if ( shapes[0].origin.y > 1 ) {
+                        nudge(&shapes[0], UP, 1);
                     }
                     break;
 
                 case 'l':
-                    if ( rects[0].origin.x + rects[0].width < screen_size.cols ) {
-                        nudge(&rects[0], RIGHT, 1);
+                    if ( shapes[0].origin.x + shapes[0].width < screen_size.cols ) {
+                        nudge(&shapes[0], RIGHT, 1);
                     }
                     break;
                 }
 
-                draw(&rects[0]);
+                draw(&shapes[0]);
                 move_cursor(orig_cursor_pos);
             }
         }

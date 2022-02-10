@@ -8,10 +8,6 @@ typedef struct{
     text_mode_t mode_mask;
 } style_t;
 
-typedef struct{
-    style_t inner, border;
-} obj_style_t;
-
 void set_style(const style_t *);
 void reset_all(void);
 
