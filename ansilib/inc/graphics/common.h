@@ -3,6 +3,12 @@
 
 #include <stdint.h>
 
+/****************************************
+ * @brief       - Declaring the position
+                  coordinates of cursor
+
+ */
+
 typedef struct {
     int32_t x, y;
 } point_t;

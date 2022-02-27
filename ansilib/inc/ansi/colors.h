@@ -3,6 +3,11 @@
 
 # define DONT_CHANGE 0
 
+/***************************************************************
+ * @brief     - Summarizing the colors for background and foreground txt
+
+ */
+
 typedef enum {
     /* DONT_CHANGE=0, */
 
@@ -50,6 +55,11 @@ typedef enum {
     BRIGHT_CYAN_BG,
     BRIGHT_WHITE_BG,
 } color_t;
+
+/***************************************************************
+ * @brief     - Summarizing the styles for background and foreground txt
+
+ */
 
 typedef enum {
     /* DONT_CHANGE = 0, */
