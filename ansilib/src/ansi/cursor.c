@@ -7,6 +7,17 @@
 #include <ansi/common.h>
 #include <ansi/cursor.h>
 
+/****************************************************
+ * @fn          - point_t get_cursor_pos(void)
+ *
+ * @brief       - used in getting cursor position
+ *
+ * @param[n]    - void; because it only return current position
+ *
+ * @return      - point_t; its coordinate
+
+ */
+
 point_t get_cursor_pos(void)
 {
     point_t ret = { 0 };
@@ -24,6 +35,17 @@ point_t get_cursor_pos(void)
     return ret;
 }
 
+/****************************************************
+ * @fn          - void move_cursor(point_t pos)
+ *
+ * @brief       - used in moving cursor position
+ *
+ * @param[n]    - point_t
+ *
+ * @return      - void; because it only moves position
+
+ */
+
 void move_cursor(point_t pos)
 {
     /*
@@ -34,6 +56,20 @@ void move_cursor(point_t pos)
 
     printws(NULL, CSI"%i;%iH", pos.y, pos.x);
 }
+
+/****************************************************
+ * @fn          - void nudge_cursor(dir_t direction, uint32_t step)
+ *
+ * @brief       - used in pushing the cursor in specified direction
+                  and steps
+ *
+ * @param[n]    - dir_t; direction for cursor
+ *
+ * @param[n]    - uint32_t; steps for moving the direction
+ *
+ * @return      - void; because it only pushes cursor
+
+ */
 
 void nudge_cursor(dir_t direction, uint32_t step)
 {

@@ -3,6 +3,12 @@
 
 # include <graphics/common.h>
 
+/******************************
+ * @brief     - Declaring the columns and rows
+                for screen
+
+ */
+
 typedef struct {
     uint32_t cols, lines;
 } screen_t;
