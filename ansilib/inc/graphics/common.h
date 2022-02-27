@@ -3,12 +3,11 @@
 
 #include <stdint.h>
 
-/****************************************
- * @brief       - Declaring the position
-                  coordinates of cursor
-
- */
-
+ /*********************************************************************\
+ * @brief   - Declaring the position coordinates of cursor or origin   *
+ *            of a box.                                                *
+ *                                                                     *
+ \*********************************************************************/
 typedef struct {
     int32_t x, y;
 } point_t;

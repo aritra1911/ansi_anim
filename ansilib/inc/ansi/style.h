@@ -3,12 +3,10 @@
 
 # include <ansi/colors.h>
 
-/******************************
- * @brief     - Wrapping the styles and colors
-                for text in one entity
-
- */
-
+ /*********************************************************************\
+ * @brief   - Wrapping the styles and colors for text in one entity    *
+ *                                                                     *
+ \*********************************************************************/
 typedef struct{
     color_t fg,bg;
     text_mode_t mode_mask;

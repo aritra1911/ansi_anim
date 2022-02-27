@@ -6,19 +6,20 @@
 #include <ansi/colors.h>
 #include <ansi/style.h>
 
-/****************************************************
- * @fn          - static char *get_text_mode_str(text_mode_t m, char *mode_str)
- *
- * @brief       - converts the style to raw form
- *
- * @param[n]    - text_mode_t; coverting to raw style
- *
- * @param[n]    - char *; style of the text
- *
- * @return      - char *; raw format of style
-
- */
-
+ /*********************************************************************\
+ * @fn          - static char *get_text_mode_str(text_mode_t m,        *
+ *                                               char *mode_str)       *
+ *                                                                     *
+ * @brief       - converts the style to raw form                       *
+ *                                                                     *
+ * @param[n]    - text_mode_t; coverting to raw style                  *
+ *                                                                     *
+ * @param[n]    - char *; style of the text                            *
+ *                                                                     *
+ * @param[n]    - char *; style of the text                            *
+ * @return      - char *; raw format of style                          *
+ *                                                                     *
+ \*********************************************************************/
 static char *get_text_mode_str(text_mode_t m, char *mode_str)
 {
     int  barf = 1;
@@ -41,17 +42,16 @@ static char *get_text_mode_str(text_mode_t m, char *mode_str)
     return mode_str;
 }
 
-/****************************************************
- * @fn          - void set_style(const style_t *s)
- *
- * @brief       - implementation of color and style on text
- *
- * @param[n]    - style_t; it contains color and style
- *
- * @return      - void
-
- */
-
+ /*********************************************************************\
+ * @fn          - void set_style(const style_t *s)                     *
+ *                                                                     *
+ * @brief       - implementation of color and style on text            *
+ *                                                                     *
+ * @param[n]    - style_t; it contains color and style                 *
+ *                                                                     *
+ * @return      - void                                                 *
+ *                                                                     *
+ \*********************************************************************/
 void set_style(const style_t *s)
 {
     char text_mode_str[32],
@@ -81,17 +81,16 @@ void set_style(const style_t *s)
     printws(NULL, buf);
 }
 
-/****************************************************
- * @fn          - void reset_all(void)
- *
- * @brief       - resets the color and style
- *
- * @param[n]    - void
- *
- * @return      - void
-
- */
-
+ /*********************************************************************\
+ * @fn          - void reset_all(void)                                 *
+ *                                                                     *
+ * @brief       - resets the color and style                           *
+ *                                                                     *
+ * @param[n]    - void                                                 *
+ *                                                                     *
+ * @return      - void                                                 *
+ *                                                                     *
+ \*********************************************************************/
 void reset_all(void)
 {
     printws(NULL, CSI"0m");

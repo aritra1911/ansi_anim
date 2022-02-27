@@ -3,12 +3,11 @@
 
 # include <graphics/common.h>
 
-/******************************
- * @brief     - Declaring the nudge of the cursor
-                for positioning of the texts
-
- */
-
+ /*********************************************************************\
+ * @brief   - Defining the nudge direction of the cursor for           *
+ *            positioning of the texts                                 *
+ *                                                                     *
+ \*********************************************************************/
 typedef enum { LEFT, DOWN, UP, RIGHT } dir_t;
 
 point_t get_cursor_pos(void);

@@ -4,11 +4,10 @@
 # include <graphics/common.h>
 # include <ansi/style.h>
 
-/****************************************
- * @brief       - Declaring the shapes included
-
- */
-
+ /*********************************************************************\
+ * @brief   - Defining the shapes included                             *
+ *                                                                     *
+ \*********************************************************************/
 typedef enum {
     RECTANGLE,
     TRIANGLE,

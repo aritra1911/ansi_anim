@@ -5,16 +5,15 @@
 #include <graphics/box.h>
 #include <graphics/shapes.h>
 
-/*********************************************************************
- * @fn      		  - void draw(const box_t *box)
- *
- * @brief             - chooses the shape
- *
- * @param[in]         - box_t; covers the properties of a box
- *
- * @return            - void
- */
-
+ /*********************************************************************\
+ * @fn          - void draw(const box_t *box)                          *
+ *                                                                     *
+ * @brief       - draws a box                                          *
+ *                                                                     *
+ * @param[in]   - box_t; covers the properties of a box                *
+ *                                                                     *
+ * @return      - void                                                 *
+ \*********************************************************************/
 void draw(const box_t *box)
 {
     switch ( box->type ) {
@@ -31,16 +30,15 @@ void draw(const box_t *box)
     }
 }
 
-/*********************************************************************
- * @fn      		  - void erase(const box_t *box)
- *
- * @brief             - erases the text
- *
- * @param[n]          - box_t
- *
- * @return            - void
- */
-
+ /*********************************************************************\
+ * @fn          - void erase(const box_t *box)                         *
+ *                                                                     *
+ * @brief       - erases a box                                         *
+ *                                                                     *
+ * @param[n]    - box_t                                                *
+ *                                                                     *
+ * @return      - void                                                 *
+ \*********************************************************************/
 void erase(const box_t *box)
 {
     switch ( box->type ) {
@@ -55,18 +53,19 @@ void erase(const box_t *box)
     }
 }
 
-/*********************************************************************
- * @fn               - void nudge(box_t *box, dir_t dir, int32_t steps)
- *
- * @brief            - draws the shape according to direction and steps
- *
- * @param[n]         - box_t; covers the properties of a box
- * @param[n]         - dir_t; direction togo
- * @param[n]         - int32_t; steps in the specified direction
- *
- * @return           - void
- */
-
+ /*********************************************************************\
+ * @fn               - void                                            *
+ *                     nudge(box_t *box, dir_t dir, int32_t steps)     *
+ *                                                                     *
+ * @brief            - draws the shape according to direction and      *
+ *                     steps                                           *
+ *                                                                     *
+ * @param[n]         - box_t; covers the properties of a box           *
+ * @param[n]         - dir_t; nudge direction                          *
+ * @param[n]         - int32_t; steps in the specified direction       *
+ *                                                                     *
+ * @return           - void                                            *
+ \*********************************************************************/
 void nudge(box_t *box, dir_t dir, int32_t steps)
 {
     switch ( dir ) {

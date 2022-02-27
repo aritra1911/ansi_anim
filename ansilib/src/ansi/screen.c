@@ -5,17 +5,16 @@
 #include <ansi/cursor.h>
 #include <ansi/screen.h>
 
-/****************************************************
- * @fn          - screen_t get_screen_size(void)
- *
- * @brief       - puts the rows and columns of screen terminal
- *
- * @param[n]    - void; because it only return screen size
- *
- * @return      - screen_t; rows and columns
-
- */
-
+ /*********************************************************************\
+ * @fn          - screen_t get_screen_size(void)                       *
+ *                                                                     *
+ * @brief       - fetches the lines and columns of the terminal        *
+ *                                                                     *
+ * @param[n]    - void; because it only return screen size             *
+ *                                                                     *
+ * @return      - screen_t; rows and columns                           *
+ *                                                                     *
+ \*********************************************************************/
 screen_t get_screen_size(void)
 {
     screen_t ret;
@@ -43,17 +42,16 @@ screen_t get_screen_size(void)
     return ret;
 }
 
-/****************************************************
- * @fn          - void clear_screen(void)
- *
- * @brief       - clears the terminal screen
- *
- * @param[n]    - void
- *
- * @return      - void
-
- */
-
+ /*********************************************************************\
+ * @fn          - void clear_screen(void)                              *
+ *                                                                     *
+ * @brief       - clears the terminal screen                           *
+ *                                                                     *
+ * @param[n]    - void                                                 *
+ *                                                                     *
+ * @return      - void                                                 *
+ *                                                                     *
+ \*********************************************************************/
 void clear_screen(void)
 {
     printws(NULL, CSI"H"CSI"2J");

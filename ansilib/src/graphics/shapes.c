@@ -5,19 +5,22 @@
 #include <ansi/style.h>
 #include <graphics/shapes.h>
 
-/*********************************************************************
- * @fn      		 - void draw_rectangle(const style_t *border, const style_t *fill,
-                                           uint32_t width, uint32_t height, char ch, char fill_ch)
- *
- * @brief            - draws rectangle
- *
- * @param[n]         - style_t; color and style of border and inner characters
- * @param[n]         - uint32_t; height and width
- * @param[n]         - char; character for inner and border
- *
- * @return           - void
- */
-
+ /*********************************************************************\
+ * @fn          - void draw_rectangle(const style_t *border,           *
+ *                                    const style_t *fill,             *
+ *                                    uint32_t width, uint32_t height, *
+ *                                    char ch, char fill_ch)           *
+ *                                                                     *
+ * @brief       - draws a rectangle                                    *
+ *                                                                     *
+ * @param[n]    - style_t; color and style of border and inner         *
+ *                         characters                                  *
+ * @param[n]    - uint32_t; height and width                           *
+ * @param[n]    - char; character for inner and border                 *
+ *                                                                     *
+ * @return      - void                                                 *
+ *                                                                     *
+ \*********************************************************************/
 void draw_rectangle(const style_t *border, const style_t *fill,
                     uint32_t width, uint32_t height, char ch, char fill_ch)
 {
@@ -55,19 +58,21 @@ void draw_rectangle(const style_t *border, const style_t *fill,
     }
 }
 
-/*********************************************************************
- * @fn      		 - void draw_triangle(const style_t *border, const style_t *fill,
-                                          uint32_t height, char ch, char fill_ch)
- *
- * @brief            - draws triangle
- *
- * @param[n]         - style_t
- * @param[n]         - uint32_t
- * @param[n]         - char
- *
- * @return           - void
- */
-
+ /*********************************************************************\
+ * @fn          - void draw_triangle(const style_t *border,            *
+ *                                   const style_t *fill,              *
+ *                                   uint32_t height, char ch,         *
+ *                                   char fill_ch)                     *
+ *                                                                     *
+ * @brief       - draws a triangle                                     *
+ *                                                                     *
+ * @param[n]    - style_t                                              *
+ * @param[n]    - uint32_t                                             *
+ * @param[n]    - char                                                 *
+ *                                                                     *
+ * @return      - void                                                 *
+ *                                                                     *
+ \*********************************************************************/
 void draw_triangle(const style_t *border, const style_t *fill,
                    uint32_t height, char ch, char fill_ch)
 {
